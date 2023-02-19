@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Gestion_Stagaires__Al_Omrane_.Models.Stagaires>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<p>
+  <h2> List d'attente </h2>
+</p>
+<div class="srch">
+   @using (Html.BeginForm("Chercher", "Affectation", FormMethod.Get))
+    {
+        @Html.Label("Recherch par CIN :")
+        @Html.TextBox("cin")
+        <input type="submit" value="Chercher" />
+    }
+</div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prenom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model=>model.Profiles.Spécialité)
+            </th>
+        </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prenom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tel)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profiles.Spécialité.Nom)
+                </td>
+                <td>
+                    | @Html.ActionLink("affecter", "Affecter", new { id = item.CIN }) |
+                </td>
+            </tr>
+         }
+
+    </table>

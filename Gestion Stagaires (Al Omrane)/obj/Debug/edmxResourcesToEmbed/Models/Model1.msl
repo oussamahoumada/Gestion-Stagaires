@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Gestion_StagairesEntities">
+    <EntitySetMapping Name="Administrateur">
+      <EntityTypeMapping TypeName="Model.Administrateur">
+        <MappingFragment StoreEntitySet="Administrateur">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MotdePass" ColumnName="MotdePass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Etablissements">
+      <EntityTypeMapping TypeName="Model.Etablissements">
+        <MappingFragment StoreEntitySet="Etablissements">
+          <ScalarProperty Name="Id_E" ColumnName="Id_E" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+          <ScalarProperty Name="ville" ColumnName="ville" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profiles">
+      <EntityTypeMapping TypeName="Model.Profiles">
+        <MappingFragment StoreEntitySet="Profiles">
+          <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+          <ScalarProperty Name="Id_P" ColumnName="Id_P" />
+          <ScalarProperty Name="CV" ColumnName="CV" />
+          <ScalarProperty Name="Experience" ColumnName="Experience" />
+          <ScalarProperty Name="Compétence" ColumnName="Compétence" />
+          <ScalarProperty Name="ProjetRealisé" ColumnName="ProjetRealisé" />
+          <ScalarProperty Name="Spés" ColumnName="Spés" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Responsables">
+      <EntityTypeMapping TypeName="Model.Responsables">
+        <MappingFragment StoreEntitySet="Responsables">
+          <ScalarProperty Name="CIN" ColumnName="CIN" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="R_Service" ColumnName="R.Service" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="Model.Services">
+        <MappingFragment StoreEntitySet="Services">
+          <ScalarProperty Name="Numéro" ColumnName="Numéro" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Spécialité">
+      <EntityTypeMapping TypeName="Model.Spécialité">
+        <MappingFragment StoreEntitySet="Spécialité">
+          <ScalarProperty Name="Id_S" ColumnName="Id_S" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Etab" ColumnName="Etab" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Villes">
+      <EntityTypeMapping TypeName="Model.Villes">
+        <MappingFragment StoreEntitySet="Villes">
+          <ScalarProperty Name="Id_V" ColumnName="Id_V" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="CodPostale" ColumnName="CodPostale" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stagaires">
+      <EntityTypeMapping TypeName="Model.Stagaires">
+        <MappingFragment StoreEntitySet="Stagaires">
+          <ScalarProperty Name="Durée" ColumnName="Durée" />
+          <ScalarProperty Name="Profil" ColumnName="Profil" />
+          <ScalarProperty Name="S_Service" ColumnName="S.Service" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Depos_Rappoert" ColumnName="Depos_Rappoert" />
+          <ScalarProperty Name="Rapport" ColumnName="Rapport" />
+          <ScalarProperty Name="Sujet" ColumnName="Sujet" />
+          <ScalarProperty Name="Date_Debut" ColumnName="Date Debut" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="CIN" ColumnName="CIN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

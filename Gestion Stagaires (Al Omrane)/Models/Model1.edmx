@@ -1,0 +1,513 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrateur">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MotdePass" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Etablissements">
+          <Key>
+            <PropertyRef Name="Id_E" />
+          </Key>
+          <Property Name="Id_E" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" />
+          <Property Name="Adresse" Type="varchar" MaxLength="100" />
+          <Property Name="ville" Type="int" />
+        </EntityType>
+        <EntityType Name="Profiles">
+          <Key>
+            <PropertyRef Name="Id_P" />
+          </Key>
+          <Property Name="Id_P" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CV" Type="varchar" MaxLength="200" />
+          <Property Name="Experience" Type="varchar" MaxLength="200" />
+          <Property Name="Compétence" Type="varchar" MaxLength="200" />
+          <Property Name="ProjetRealisé" Type="varchar" MaxLength="200" />
+          <Property Name="Spés" Type="int" />
+          <Property Name="Libelle" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Responsables">
+          <Key>
+            <PropertyRef Name="CIN" />
+          </Key>
+          <Property Name="CIN" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" />
+          <Property Name="Prenom" Type="varchar" MaxLength="100" />
+          <Property Name="Tel" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="R.Service" Type="int" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="Numéro" />
+          </Key>
+          <Property Name="Numéro" Type="int" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Spécialité">
+          <Key>
+            <PropertyRef Name="Id_S" />
+          </Key>
+          <Property Name="Id_S" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" />
+          <Property Name="Etab" Type="int" />
+        </EntityType>
+        <EntityType Name="Stagaires">
+          <Key>
+            <PropertyRef Name="CIN" />
+          </Key>
+          <Property Name="CIN" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" />
+          <Property Name="Prenom" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Tel" Type="varchar" MaxLength="100" />
+          <Property Name="Date Debut" Type="date" />
+          <Property Name="Sujet" Type="varchar" MaxLength="100" />
+          <Property Name="Rapport" Type="varchar" MaxLength="100" />
+          <Property Name="Depos_Rappoert" Type="bit" />
+          <Property Name="Note" Type="float" />
+          <Property Name="S.Service" Type="int" />
+          <Property Name="Profil" Type="int" />
+          <Property Name="Durée" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Villes">
+          <Key>
+            <PropertyRef Name="Id_V" />
+          </Key>
+          <Property Name="Id_V" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" />
+          <Property Name="CodPostale" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Etablisse__ville__3E52440B">
+          <End Role="Villes" Type="Self.Villes" Multiplicity="0..1" />
+          <End Role="Etablissements" Type="Self.Etablissements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Villes">
+              <PropertyRef Name="Id_V" />
+            </Principal>
+            <Dependent Role="Etablissements">
+              <PropertyRef Name="ville" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Profiles__Spés__440B1D61">
+          <End Role="Spécialité" Type="Self.Spécialité" Multiplicity="0..1" />
+          <End Role="Profiles" Type="Self.Profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spécialité">
+              <PropertyRef Name="Id_S" />
+            </Principal>
+            <Dependent Role="Profiles">
+              <PropertyRef Name="Spés" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Spécialité__Etab__412EB0B6">
+          <End Role="Etablissements" Type="Self.Etablissements" Multiplicity="0..1" />
+          <End Role="Spécialité" Type="Self.Spécialité" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etablissements">
+              <PropertyRef Name="Id_E" />
+            </Principal>
+            <Dependent Role="Spécialité">
+              <PropertyRef Name="Etab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stagaires__Profi__47DBAE45">
+          <End Role="Profiles" Type="Self.Profiles" Multiplicity="0..1" />
+          <End Role="Stagaires" Type="Self.Stagaires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profiles">
+              <PropertyRef Name="Id_P" />
+            </Principal>
+            <Dependent Role="Stagaires">
+              <PropertyRef Name="Profil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk1">
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+          <End Role="Responsables" Type="Self.Responsables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="Numéro" />
+            </Principal>
+            <Dependent Role="Responsables">
+              <PropertyRef Name="R.Service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk2">
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+          <End Role="Stagaires" Type="Self.Stagaires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="Numéro" />
+            </Principal>
+            <Dependent Role="Stagaires">
+              <PropertyRef Name="S.Service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Administrateur" EntityType="Self.Administrateur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Etablissements" EntityType="Self.Etablissements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profiles" EntityType="Self.Profiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Responsables" EntityType="Self.Responsables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spécialité" EntityType="Self.Spécialité" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stagaires" EntityType="Self.Stagaires" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Villes" EntityType="Self.Villes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Etablisse__ville__3E52440B" Association="Self.FK__Etablisse__ville__3E52440B">
+            <End Role="Villes" EntitySet="Villes" />
+            <End Role="Etablissements" EntitySet="Etablissements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profiles__Spés__440B1D61" Association="Self.FK__Profiles__Spés__440B1D61">
+            <End Role="Spécialité" EntitySet="Spécialité" />
+            <End Role="Profiles" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Spécialité__Etab__412EB0B6" Association="Self.FK__Spécialité__Etab__412EB0B6">
+            <End Role="Etablissements" EntitySet="Etablissements" />
+            <End Role="Spécialité" EntitySet="Spécialité" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stagaires__Profi__47DBAE45" Association="Self.FK__Stagaires__Profi__47DBAE45">
+            <End Role="Profiles" EntitySet="Profiles" />
+            <End Role="Stagaires" EntitySet="Stagaires" />
+          </AssociationSet>
+          <AssociationSet Name="fk1" Association="Self.fk1">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Responsables" EntitySet="Responsables" />
+          </AssociationSet>
+          <AssociationSet Name="fk2" Association="Self.fk2">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Stagaires" EntitySet="Stagaires" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrateur">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MotdePass" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Etablissements">
+          <Key>
+            <PropertyRef Name="Id_E" />
+          </Key>
+          <Property Name="Id_E" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Adresse" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ville" Type="Int32" />
+          <NavigationProperty Name="Villes" Relationship="Self.FK__Etablisse__ville__3E52440B" FromRole="Etablissements" ToRole="Villes" />
+          <NavigationProperty Name="Spécialité" Relationship="Self.FK__Spécialité__Etab__412EB0B6" FromRole="Etablissements" ToRole="Spécialité" />
+        </EntityType>
+        <EntityType Name="Profiles">
+          <Key>
+            <PropertyRef Name="Id_P" />
+          </Key>
+          <Property Name="Id_P" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CV" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Experience" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Compétence" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ProjetRealisé" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Spés" Type="Int32" />
+          <NavigationProperty Name="Spécialité" Relationship="Self.FK__Profiles__Spés__440B1D61" FromRole="Profiles" ToRole="Spécialité" />
+          <NavigationProperty Name="Stagaires" Relationship="Model.FK__Stagaires__Profi__47DBAE45" FromRole="Profiles" ToRole="Stagaires" />
+          <Property Name="Libelle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Responsables">
+          <Key>
+            <PropertyRef Name="CIN" />
+          </Key>
+          <Property Name="CIN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="R_Service" Type="Int32" />
+          <NavigationProperty Name="Services" Relationship="Self.fk1" FromRole="Responsables" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="Numéro" />
+          </Key>
+          <Property Name="Numéro" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Responsables" Relationship="Self.fk1" FromRole="Services" ToRole="Responsables" />
+          <NavigationProperty Name="Stagaires" Relationship="Model.fk2" FromRole="Services" ToRole="Stagaires" />
+        </EntityType>
+        <EntityType Name="Spécialité">
+          <Key>
+            <PropertyRef Name="Id_S" />
+          </Key>
+          <Property Name="Id_S" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Etab" Type="Int32" />
+          <NavigationProperty Name="Etablissements" Relationship="Self.FK__Spécialité__Etab__412EB0B6" FromRole="Spécialité" ToRole="Etablissements" />
+          <NavigationProperty Name="Profiles" Relationship="Self.FK__Profiles__Spés__440B1D61" FromRole="Spécialité" ToRole="Profiles" />
+        </EntityType>
+        <EntityType Name="Villes">
+          <Key>
+            <PropertyRef Name="Id_V" />
+          </Key>
+          <Property Name="Id_V" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CodPostale" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Etablissements" Relationship="Self.FK__Etablisse__ville__3E52440B" FromRole="Villes" ToRole="Etablissements" />
+        </EntityType>
+        <Association Name="FK__Etablisse__ville__3E52440B">
+          <End Role="Villes" Type="Self.Villes" Multiplicity="0..1" />
+          <End Role="Etablissements" Type="Self.Etablissements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Villes">
+              <PropertyRef Name="Id_V" />
+            </Principal>
+            <Dependent Role="Etablissements">
+              <PropertyRef Name="ville" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Spécialité__Etab__412EB0B6">
+          <End Role="Etablissements" Type="Self.Etablissements" Multiplicity="0..1" />
+          <End Role="Spécialité" Type="Self.Spécialité" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etablissements">
+              <PropertyRef Name="Id_E" />
+            </Principal>
+            <Dependent Role="Spécialité">
+              <PropertyRef Name="Etab" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Profiles__Spés__440B1D61">
+          <End Role="Spécialité" Type="Self.Spécialité" Multiplicity="0..1" />
+          <End Role="Profiles" Type="Self.Profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spécialité">
+              <PropertyRef Name="Id_S" />
+            </Principal>
+            <Dependent Role="Profiles">
+              <PropertyRef Name="Spés" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk1">
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+          <End Role="Responsables" Type="Self.Responsables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="Numéro" />
+            </Principal>
+            <Dependent Role="Responsables">
+              <PropertyRef Name="R_Service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Gestion_StagairesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrateur" EntityType="Self.Administrateur" />
+          <EntitySet Name="Etablissements" EntityType="Self.Etablissements" />
+          <EntitySet Name="Profiles" EntityType="Self.Profiles" />
+          <EntitySet Name="Responsables" EntityType="Self.Responsables" />
+          <EntitySet Name="Services" EntityType="Self.Services" />
+          <EntitySet Name="Spécialité" EntityType="Self.Spécialité" />
+          <EntitySet Name="Villes" EntityType="Self.Villes" />
+          <AssociationSet Name="FK__Etablisse__ville__3E52440B" Association="Self.FK__Etablisse__ville__3E52440B">
+            <End Role="Villes" EntitySet="Villes" />
+            <End Role="Etablissements" EntitySet="Etablissements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Spécialité__Etab__412EB0B6" Association="Self.FK__Spécialité__Etab__412EB0B6">
+            <End Role="Etablissements" EntitySet="Etablissements" />
+            <End Role="Spécialité" EntitySet="Spécialité" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profiles__Spés__440B1D61" Association="Self.FK__Profiles__Spés__440B1D61">
+            <End Role="Spécialité" EntitySet="Spécialité" />
+            <End Role="Profiles" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="fk1" Association="Self.fk1">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Responsables" EntitySet="Responsables" />
+          </AssociationSet>
+          <EntitySet Name="Stagaires" EntityType="Model.Stagaires" />
+          <AssociationSet Name="FK__Stagaires__Profi__47DBAE45" Association="Model.FK__Stagaires__Profi__47DBAE45">
+            <End Role="Profiles" EntitySet="Profiles" />
+            <End Role="Stagaires" EntitySet="Stagaires" />
+          </AssociationSet>
+          <AssociationSet Name="fk2" Association="Model.fk2">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Stagaires" EntitySet="Stagaires" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Stagaires">
+          <Key>
+            <PropertyRef Name="CIN" />
+          </Key>
+          <Property Name="CIN" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Debut" Type="DateTime" Precision="0" />
+          <Property Name="Sujet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Rapport" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Depos_Rappoert" Type="Boolean" />
+          <Property Name="Note" Type="Double" />
+          <Property Name="S_Service" Type="Int32" />
+          <Property Name="Profil" Type="Int32" />
+          <Property Name="Durée" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Profiles" Relationship="Model.FK__Stagaires__Profi__47DBAE45" FromRole="Stagaires" ToRole="Profiles" />
+          <NavigationProperty Name="Services" Relationship="Model.fk2" FromRole="Stagaires" ToRole="Services" />
+        </EntityType>
+        <Association Name="FK__Stagaires__Profi__47DBAE45">
+          <End Type="Model.Profiles" Role="Profiles" Multiplicity="0..1" />
+          <End Type="Model.Stagaires" Role="Stagaires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profiles">
+              <PropertyRef Name="Id_P" />
+            </Principal>
+            <Dependent Role="Stagaires">
+              <PropertyRef Name="Profil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk2">
+          <End Type="Model.Services" Role="Services" Multiplicity="0..1" />
+          <End Type="Model.Stagaires" Role="Stagaires" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="Numéro" />
+            </Principal>
+            <Dependent Role="Stagaires">
+              <PropertyRef Name="S_Service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Gestion_StagairesEntities">
+          <EntitySetMapping Name="Administrateur">
+            <EntityTypeMapping TypeName="Model.Administrateur">
+              <MappingFragment StoreEntitySet="Administrateur">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MotdePass" ColumnName="MotdePass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Etablissements">
+            <EntityTypeMapping TypeName="Model.Etablissements">
+              <MappingFragment StoreEntitySet="Etablissements">
+                <ScalarProperty Name="Id_E" ColumnName="Id_E" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="ville" ColumnName="ville" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="Model.Profiles">
+              <MappingFragment StoreEntitySet="Profiles">
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="Id_P" ColumnName="Id_P" />
+                <ScalarProperty Name="CV" ColumnName="CV" />
+                <ScalarProperty Name="Experience" ColumnName="Experience" />
+                <ScalarProperty Name="Compétence" ColumnName="Compétence" />
+                <ScalarProperty Name="ProjetRealisé" ColumnName="ProjetRealisé" />
+                <ScalarProperty Name="Spés" ColumnName="Spés" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responsables">
+            <EntityTypeMapping TypeName="Model.Responsables">
+              <MappingFragment StoreEntitySet="Responsables">
+                <ScalarProperty Name="CIN" ColumnName="CIN" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="R_Service" ColumnName="R.Service" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="Model.Services">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="Numéro" ColumnName="Numéro" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spécialité">
+            <EntityTypeMapping TypeName="Model.Spécialité">
+              <MappingFragment StoreEntitySet="Spécialité">
+                <ScalarProperty Name="Id_S" ColumnName="Id_S" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Etab" ColumnName="Etab" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Villes">
+            <EntityTypeMapping TypeName="Model.Villes">
+              <MappingFragment StoreEntitySet="Villes">
+                <ScalarProperty Name="Id_V" ColumnName="Id_V" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="CodPostale" ColumnName="CodPostale" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stagaires">
+            <EntityTypeMapping TypeName="Model.Stagaires">
+              <MappingFragment StoreEntitySet="Stagaires">
+                <ScalarProperty Name="Durée" ColumnName="Durée" />
+                <ScalarProperty Name="Profil" ColumnName="Profil" />
+                <ScalarProperty Name="S_Service" ColumnName="S.Service" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Depos_Rappoert" ColumnName="Depos_Rappoert" />
+                <ScalarProperty Name="Rapport" ColumnName="Rapport" />
+                <ScalarProperty Name="Sujet" ColumnName="Sujet" />
+                <ScalarProperty Name="Date_Debut" ColumnName="Date Debut" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="CIN" ColumnName="CIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

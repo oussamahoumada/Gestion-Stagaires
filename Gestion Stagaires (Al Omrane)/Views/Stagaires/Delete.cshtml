@@ -1,0 +1,124 @@
+﻿@model Gestion_Stagaires__Al_Omrane_.Models.Stagaires
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Supprimer</h2>
+
+<h3>Voulez vous vraiment supprimer @Model.Nom  @Model.Prenom ?</h3>
+<div>
+    <h4>
+        
+    </h4>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prenom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prenom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Debut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Debut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Durée)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Durée)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sujet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sujet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rapport)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rapport)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Depos_Rappoert)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Depos_Rappoert)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Profiles.CV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Profiles.CV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Services.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Services.Nom)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("List Stagaires", "Index")
+        </div>
+    }
+</div>

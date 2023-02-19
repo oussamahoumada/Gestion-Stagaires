@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4da90c1fb7394e818cba01b1191b8f9c" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Administrateur" Width="1.5" PointX="3.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Etablissements" Width="1.5" PointX="1.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Profiles" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Responsables" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Services" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Spécialité" Width="1.5" PointX="1.5" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Villes" Width="1.5" PointX="1.5" PointY="12" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__Etablisse__ville__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Spécialité__Etab__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Profiles__Spés__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.fk1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.Stagaires" Width="1.5" PointX="6" PointY="1.875" />
+        <AssociationConnector Association="Model.FK__Stagaires__Profi__47DBAE45" />
+        <AssociationConnector Association="Model.fk2" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

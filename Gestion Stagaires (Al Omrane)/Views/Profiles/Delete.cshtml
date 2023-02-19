@@ -1,0 +1,71 @@
+﻿@model Gestion_Stagaires__Al_Omrane_.Models.Profiles
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+    <h3>Voulez vous vraiment supprimer @Model.Libelle ?</h3>
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Libelle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Libelle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Experience)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Experience)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Compétence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Compétence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjetRealisé)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjetRealisé)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Spécialité.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Spécialité.Nom)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("List Profiles", "Index")
+        </div>
+    }
+</div>

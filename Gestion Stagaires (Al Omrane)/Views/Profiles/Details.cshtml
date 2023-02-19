@@ -1,0 +1,72 @@
+﻿@model Gestion_Stagaires__Al_Omrane_.Models.Profiles
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>@Model.Libelle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Libelle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Libelle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CV)
+        </dt>
+
+        <dd>
+            <a href="~/Docs/@Model.CV"> CV </a>
+            @*@Html.DisplayFor(model => model.CV)*@
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Experience)
+        </dt>
+
+        <dd>
+            <a href="~/Docs/@Model.Experience"> Experience </a>
+            @* @Html.DisplayFor(model => model.Experience) *@
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Compétence)
+        </dt>
+
+        <dd>
+            <a href="~/Docs/@Model.Compétence"> Compétence </a>
+           @* @Html.DisplayFor(model => model.Compétence)*@
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjetRealisé)
+        </dt>
+
+        <dd>
+            <a href="~/Docs/@Model.ProjetRealisé"> ProjetRealisé </a>
+            @*@Html.DisplayFor(model => model.ProjetRealisé)*@
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Spécialité.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Spécialité.Nom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modofier", "Edit", new { id = Model.Id_P }) |
+    @Html.ActionLink("List Profiles", "Index")
+</p>

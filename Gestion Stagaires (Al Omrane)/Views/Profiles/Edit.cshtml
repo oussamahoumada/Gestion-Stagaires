@@ -1,0 +1,71 @@
+﻿@model Gestion_Stagaires__Al_Omrane_.Models.Profiles
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+    <h2>Modifier @Model.Libelle</h2>
+
+@using (Html.BeginForm("Edit", "Profiles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id_P)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Libelle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Libelle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Libelle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Charger Votre Doc", "CV", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="doc" id="doc" accept="file_extention|.pdf,.doc,.docx" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Charger Votre Doc", "Experience", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="doc" id="doc" accept="file_extention|.pdf,.doc,.docx" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Charger Votre Doc", "Compétence", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="doc" id="doc" accept="file_extention|.pdf,.doc,.docx" />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Charger Votre Doc", "ProjetRealisé", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="doc" id="doc" accept="file_extention|.pdf,.doc,.docx" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Spés, "Spés", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Spés", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Spés, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Sauvgarder" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("List Profiles", "Index")
+</div>

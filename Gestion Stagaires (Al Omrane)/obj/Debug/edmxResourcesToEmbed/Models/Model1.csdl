@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Administrateur">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MotdePass" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Etablissements">
+    <Key>
+      <PropertyRef Name="Id_E" />
+    </Key>
+    <Property Name="Id_E" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Adresse" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ville" Type="Int32" />
+    <NavigationProperty Name="Villes" Relationship="Self.FK__Etablisse__ville__3E52440B" FromRole="Etablissements" ToRole="Villes" />
+    <NavigationProperty Name="Spécialité" Relationship="Self.FK__Spécialité__Etab__412EB0B6" FromRole="Etablissements" ToRole="Spécialité" />
+  </EntityType>
+  <EntityType Name="Profiles">
+    <Key>
+      <PropertyRef Name="Id_P" />
+    </Key>
+    <Property Name="Id_P" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CV" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Experience" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Compétence" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ProjetRealisé" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Spés" Type="Int32" />
+    <NavigationProperty Name="Spécialité" Relationship="Self.FK__Profiles__Spés__440B1D61" FromRole="Profiles" ToRole="Spécialité" />
+    <NavigationProperty Name="Stagaires" Relationship="Model.FK__Stagaires__Profi__47DBAE45" FromRole="Profiles" ToRole="Stagaires" />
+    <Property Name="Libelle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Responsables">
+    <Key>
+      <PropertyRef Name="CIN" />
+    </Key>
+    <Property Name="CIN" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Tel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="R_Service" Type="Int32" />
+    <NavigationProperty Name="Services" Relationship="Self.fk1" FromRole="Responsables" ToRole="Services" />
+  </EntityType>
+  <EntityType Name="Services">
+    <Key>
+      <PropertyRef Name="Numéro" />
+    </Key>
+    <Property Name="Numéro" Type="Int32" Nullable="false" />
+    <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Responsables" Relationship="Self.fk1" FromRole="Services" ToRole="Responsables" />
+    <NavigationProperty Name="Stagaires" Relationship="Model.fk2" FromRole="Services" ToRole="Stagaires" />
+  </EntityType>
+  <EntityType Name="Spécialité">
+    <Key>
+      <PropertyRef Name="Id_S" />
+    </Key>
+    <Property Name="Id_S" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Etab" Type="Int32" />
+    <NavigationProperty Name="Etablissements" Relationship="Self.FK__Spécialité__Etab__412EB0B6" FromRole="Spécialité" ToRole="Etablissements" />
+    <NavigationProperty Name="Profiles" Relationship="Self.FK__Profiles__Spés__440B1D61" FromRole="Spécialité" ToRole="Profiles" />
+  </EntityType>
+  <EntityType Name="Villes">
+    <Key>
+      <PropertyRef Name="Id_V" />
+    </Key>
+    <Property Name="Id_V" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CodPostale" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Etablissements" Relationship="Self.FK__Etablisse__ville__3E52440B" FromRole="Villes" ToRole="Etablissements" />
+  </EntityType>
+  <Association Name="FK__Etablisse__ville__3E52440B">
+    <End Role="Villes" Type="Self.Villes" Multiplicity="0..1" />
+    <End Role="Etablissements" Type="Self.Etablissements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Villes">
+        <PropertyRef Name="Id_V" />
+      </Principal>
+      <Dependent Role="Etablissements">
+        <PropertyRef Name="ville" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Spécialité__Etab__412EB0B6">
+    <End Role="Etablissements" Type="Self.Etablissements" Multiplicity="0..1" />
+    <End Role="Spécialité" Type="Self.Spécialité" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Etablissements">
+        <PropertyRef Name="Id_E" />
+      </Principal>
+      <Dependent Role="Spécialité">
+        <PropertyRef Name="Etab" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Profiles__Spés__440B1D61">
+    <End Role="Spécialité" Type="Self.Spécialité" Multiplicity="0..1" />
+    <End Role="Profiles" Type="Self.Profiles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Spécialité">
+        <PropertyRef Name="Id_S" />
+      </Principal>
+      <Dependent Role="Profiles">
+        <PropertyRef Name="Spés" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk1">
+    <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+    <End Role="Responsables" Type="Self.Responsables" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="Numéro" />
+      </Principal>
+      <Dependent Role="Responsables">
+        <PropertyRef Name="R_Service" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Gestion_StagairesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Administrateur" EntityType="Self.Administrateur" />
+    <EntitySet Name="Etablissements" EntityType="Self.Etablissements" />
+    <EntitySet Name="Profiles" EntityType="Self.Profiles" />
+    <EntitySet Name="Responsables" EntityType="Self.Responsables" />
+    <EntitySet Name="Services" EntityType="Self.Services" />
+    <EntitySet Name="Spécialité" EntityType="Self.Spécialité" />
+    <EntitySet Name="Villes" EntityType="Self.Villes" />
+    <AssociationSet Name="FK__Etablisse__ville__3E52440B" Association="Self.FK__Etablisse__ville__3E52440B">
+      <End Role="Villes" EntitySet="Villes" />
+      <End Role="Etablissements" EntitySet="Etablissements" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Spécialité__Etab__412EB0B6" Association="Self.FK__Spécialité__Etab__412EB0B6">
+      <End Role="Etablissements" EntitySet="Etablissements" />
+      <End Role="Spécialité" EntitySet="Spécialité" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Profiles__Spés__440B1D61" Association="Self.FK__Profiles__Spés__440B1D61">
+      <End Role="Spécialité" EntitySet="Spécialité" />
+      <End Role="Profiles" EntitySet="Profiles" />
+    </AssociationSet>
+    <AssociationSet Name="fk1" Association="Self.fk1">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="Responsables" EntitySet="Responsables" />
+    </AssociationSet>
+    <EntitySet Name="Stagaires" EntityType="Model.Stagaires" />
+    <AssociationSet Name="FK__Stagaires__Profi__47DBAE45" Association="Model.FK__Stagaires__Profi__47DBAE45">
+      <End Role="Profiles" EntitySet="Profiles" />
+      <End Role="Stagaires" EntitySet="Stagaires" />
+    </AssociationSet>
+    <AssociationSet Name="fk2" Association="Model.fk2">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="Stagaires" EntitySet="Stagaires" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Stagaires">
+    <Key>
+      <PropertyRef Name="CIN" />
+    </Key>
+    <Property Name="CIN" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Tel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Date_Debut" Type="DateTime" Precision="0" />
+    <Property Name="Sujet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Rapport" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Depos_Rappoert" Type="Boolean" />
+    <Property Name="Note" Type="Double" />
+    <Property Name="S_Service" Type="Int32" />
+    <Property Name="Profil" Type="Int32" />
+    <Property Name="Durée" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Profiles" Relationship="Model.FK__Stagaires__Profi__47DBAE45" FromRole="Stagaires" ToRole="Profiles" />
+    <NavigationProperty Name="Services" Relationship="Model.fk2" FromRole="Stagaires" ToRole="Services" />
+  </EntityType>
+  <Association Name="FK__Stagaires__Profi__47DBAE45">
+    <End Type="Model.Profiles" Role="Profiles" Multiplicity="0..1" />
+    <End Type="Model.Stagaires" Role="Stagaires" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profiles">
+        <PropertyRef Name="Id_P" />
+      </Principal>
+      <Dependent Role="Stagaires">
+        <PropertyRef Name="Profil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk2">
+    <End Type="Model.Services" Role="Services" Multiplicity="0..1" />
+    <End Type="Model.Stagaires" Role="Stagaires" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="Numéro" />
+      </Principal>
+      <Dependent Role="Stagaires">
+        <PropertyRef Name="S_Service" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

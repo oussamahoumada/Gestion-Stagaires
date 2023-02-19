@@ -1,0 +1,23 @@
+﻿.navlayout .t {
+    background-color: darkgray;
+}
+
+/*th{
+    border-radius: 40px;
+}*/
+table{border-radius:40px}
+.navlayout .menuitem {
+   background-color: gray;
+    text-align: center;
+    border-radius: 40px;
+    font-size:large;
+}
+.navlayout {
+    background-color: darkgray;
+}
+
+.navlayout a{
+    text-decoration-color: white;
+    text-decoration-line: none
+}
+

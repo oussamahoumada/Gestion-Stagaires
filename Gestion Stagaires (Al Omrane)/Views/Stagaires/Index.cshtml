@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Gestion_Stagaires__Al_Omrane_.Models.Stagaires>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>List stagaires</h2>
+
+<p>
+    @Html.ActionLink("Nouveau stagiaire", "Create")
+</p>
+<div class="srch">
+    @using (Html.BeginForm("Chercher", "Affectation", FormMethod.Get))
+    {
+        @Html.Label("Recherch par CIN :")
+        @Html.TextBox("cin")
+        <input type="submit" value="Chercher" />
+    }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prenom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_Debut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Durée)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sujet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rapport)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Depos_Rappoert)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model=>model.Profiles.Spécialité)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Services)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prenom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_Debut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Durée)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sujet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rapport)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Depos_Rappoert)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+         <td> @Html.DisplayFor(modelItem=>item.Profiles.Spécialité.Nom)</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Services.Nom)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Edit", new { id = item.CIN }) |
+            @Html.ActionLink("Details", "Details", new { id = item.CIN }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id = item.CIN })
+        </td>
+     </tr>
+    }
+
+</table>

@@ -1,0 +1,159 @@
+﻿@model IEnumerable<Gestion_Stagaires__Al_Omrane_.Models.Stagaires>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<style>
+    .drop1 {
+    }
+
+    .srch {
+        border: 0;
+        background-color: black;
+        color: white;
+        border-radius: 40px;
+        outline: none;
+        cursor: pointer;
+    }
+
+        .srch:hover {
+            background-color: #2ecc71;
+        }
+
+    #notif {
+        color: red;
+        background-color: black;
+        text-align: center;
+    }
+</style>
+<h2>Accuiel</h2>
+<div class="statistique">
+
+    <div class="item-statistique">
+        <label class="Titre">nombre de stagaires : </label>
+        <label class="Nombre">@ViewData["nombreStagaires"]</label>
+    </div>
+
+    <div class="item-statistique">
+        <label class="Titre">nombre de Stagaires affecter :</label>
+        <label class="Nombre">@ViewData["nmbrStgAffecter"]</label>
+    </div>
+    <div class="item-statistique">
+        <label class="Titre">nombre de services :</label>
+        <label class="Nombre">@ViewData["nombreServices"]</label>
+    </div>
+
+    <p></p>
+
+    <div id="notif">
+        @ViewData["count"] Stagaires terminent leur stage aujourd'hui
+    </div>
+
+    <p></p>
+    <div class="l-stg" id="l-s">
+        <h3 style="color: gray ">Les stagaires affecter a des services</h3>
+        <div>
+            <p>
+                @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                {
+                    @Html.Label("Services")
+                    @Html.DropDownList("drop", ViewData["drop"] as List<SelectListItem>, htmlAttributes: new { @class = "drop1" })
+                    <input type="submit" value="Rechercher" class="srch" />
+                }
+            </p>
+        </div>
+    </div>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prenom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date_Debut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Durée)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sujet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profiles.Spécialité)
+            </th>
+            <th>
+                @Html.DisplayName("NomService")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prenom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date_Debut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Durée)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sujet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profiles.Spécialité.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Services.Nom)
+                </td>
+            </tr>
+
+        }
+    </table>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<footer style="background-color:darkgray">
+    <hr />
+    @DateTime.Now.ToShortDateString()
+    <hr />
+</footer>
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
+<script type='text/javascript'>
+
+    var o = 1;
+    var a=@ViewData["count"];
+    if (a < o) {
+        $(document).ready(function () {
+            alert(a+"Stagaires terminent leur stage aujourd'hui");
+            $("#notif").hide();
+
+        });
+    }
+
+</script>

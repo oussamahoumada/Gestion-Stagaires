@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Style/LayoutStyl.css" />
+    <script src="~/Script/jquery-1.10.2.js"></script>
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div>
+        <div class="menu">
+            <nav class="navlayout">
+                <hr />
+                &nbsp;&nbsp;
+                <a href="/Home/Index" class="menuitem">Home</a>&nbsp;&nbsp;
+                <a href="/Stagaires/Index" class="menuitem">Gestion Stagaires</a>&nbsp;&nbsp;
+                <a href="/Profiles/Index" class="menuitem">Gestion Profiles</a>&nbsp;&nbsp;
+
+                @*<a href="/Responsables/Index" class="menuitem">Gestion Employer</a>&nbsp;&nbsp;
+                <a href="/Services/Index" class="menuitem">Gestion Services</a>&nbsp;&nbsp;
+                <a href="/Etablissements/Index" class="menuitem">Gestion Etablissements</a>&nbsp;&nbsp;
+                <a href="/Spécialité/Index" class="menuitem">Gestion Spécialité</a>&nbsp;&nbsp;
+                <a href="/Villes/Index" class="menuitem">Gestion Villes</a>&nbsp;&nbsp;*@
+
+                <a href="/Affectation/Index" class="menuitem">Affectation</a>&nbsp;&nbsp;
+                <a href="/FinStage/Index" class="menuitem">FinStage</a>&nbsp;&nbsp;
+                <a href="/Login/Logout" class="menuitem">Déconnecter</a>&nbsp;&nbsp;
+
+
+                <hr />
+            </nav>
+        </div>
+            @RenderBody()
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Gestion_Stagaires__Al_Omrane_.Models.Stagaires>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+    <h2>List des stagiaires qui ont terminé</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="srch">
+    @using (Html.BeginForm("Chercher", "Affectation", FormMethod.Get))
+     {
+        @Html.Label("Recherch par CIN :")
+        @Html.TextBox("cin")
+        <input type="submit" value="Chercher" />
+     }
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prenom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_Debut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Durée)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Sujet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Profiles.Spécialité)
+        </th>
+        <th>
+            @Html.DisplayName("Service")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prenom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date_Debut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Durée)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sujet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem=>item.Profiles.Spécialité.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Services.Nom)
+            </td>
+            <td>
+               | @Html.ActionLink("Dernier etape", "Modifier", new { id=item.CIN }) |
+            </td>
+        </tr>
+     }
+
+</table>

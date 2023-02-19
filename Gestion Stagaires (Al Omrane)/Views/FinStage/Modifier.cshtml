@@ -1,0 +1,55 @@
+﻿@model Gestion_Stagaires__Al_Omrane_.Models.Stagaires
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>@Model.Nom @Model.Prenom</h2>
+
+ @using (Html.BeginForm("Modifier", "FinStage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+  {
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.CIN)
+
+    <div class="form-group">
+        @Html.Label("Charger Votre Doc", "Rapport", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="doc" id="doc" accept="file_extention|.pdf,.doc,.docx" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Depos_Rappoert, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Depos_Rappoert)
+                @Html.ValidationMessageFor(model => model.Depos_Rappoert, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+  }
+
+<div>
+    @Html.ActionLink("List Stagaires", "Index")
+</div>
